@@ -1,5 +1,4 @@
 import { XMLParser } from "fast-xml-parser";
-import SwitchMovieType from "../../components/movies/switchMovieType";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -60,7 +59,23 @@ const moviePage = async () => {
 				abst="AIM Commons配信動画一覧"
 			/>
 			<div className="mx-auto mb-[6vh]">
-				<SwitchMovieType shortVideoIds={latestShortVideoIds} />
+				<div className="w-full bg-[#F0EBDC]">
+					<div className="rounded-lg bg-white 2lg:p-12 p-8 3xl:px-[4%] xs:px-[20%] md:p-12 lg:px-[12%] xl:px-[8%] 2xl:px-12">
+						<div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+							{latestShortVideoIds.map((videoId) => (
+								<div key={`video-${videoId}`} className="flex">
+									<iframe
+										className="aspect-[9/16] w-full"
+										src={`https://www.youtube.com/embed/${videoId}`}
+										title={`Video - ${videoId}`}
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+										allowFullScreen
+									/>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<Button className="mx-auto mt-[2%] block rounded-lg bg-red-600 px-4 py-2 font-bold text-lg text-white">
