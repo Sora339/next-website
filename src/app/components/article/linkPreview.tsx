@@ -1,5 +1,5 @@
 "use client";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import useSWR from "swr";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
