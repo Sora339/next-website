@@ -40,21 +40,17 @@ const moviePage = async () => {
 
 	const entries: Entry[] = jsonObj.feed.entry;
 
-	let longVideoIds: VideoId[] = [];
-	let shortVideoIds: VideoId[] = [];
+	const shortVideoIds: VideoId[] = [];
 
 	for (const entry of entries) {
 		const videoId = entry["yt:videoId"];
 		if (entry.title.toLowerCase().includes("shorts")) {
 			shortVideoIds.push(videoId);
-		} else {
-			longVideoIds.push(videoId);
 		}
 	}
 
-	// 先頭9この動画だけを表示
-	longVideoIds = longVideoIds.slice(0, 9);
-	shortVideoIds = shortVideoIds.slice(0, 9);
+	// 先頭15このショート動画だけを表示
+	const latestShortVideoIds = shortVideoIds.slice(0, 15);
 
 	return (
 		<PageWrapper>
@@ -64,10 +60,7 @@ const moviePage = async () => {
 				abst="AIM Commons配信動画一覧"
 			/>
 			<div className="mx-auto mb-[6vh]">
-				<SwitchMovieType
-					longVideoIds={longVideoIds}
-					shortVideoIds={shortVideoIds}
-				/>
+				<SwitchMovieType shortVideoIds={latestShortVideoIds} />
 			</div>
 
 			<Button className="mx-auto mt-[2%] block rounded-lg bg-red-600 px-4 py-2 font-bold text-lg text-white">
